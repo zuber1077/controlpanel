@@ -32,7 +32,7 @@ export class ClientDetailsComponent implements OnInit {
         this.hasBalance = true; // they owe money
       }
       this.client = client;
-      console.log(this.client);
+      // console.log(this.client);
     })
   }
 
@@ -41,6 +41,14 @@ export class ClientDetailsComponent implements OnInit {
     this.clientService.updateClient(this.id, this.client);
     this.flashMessagesService.show('Balance Updated', {cssClass:'alert-success', timeout: 4000});
       this.router.navigate(['/client/'+this.id]);
+  }
+
+  onDeleteClick() {
+    if(confirm("Are you sure to delete?")){
+      this.clientService.deleteClient(this.id);
+      this.flashMessagesService.show('Client Deleted', { cssClass: 'alert-success', timeout: 4000 });
+      this.router.navigate(['/']);
+    }
   }
 
 }
